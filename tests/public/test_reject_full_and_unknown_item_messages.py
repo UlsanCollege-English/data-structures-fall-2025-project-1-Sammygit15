@@ -1,4 +1,4 @@
-from scheduler import Scheduler
+from src.scheduler import Scheduler
 
 def test_unknown_item_reject_and_message(capsys):
     s = Scheduler()

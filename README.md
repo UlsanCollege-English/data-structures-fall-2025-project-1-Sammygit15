@@ -1,50 +1,47 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/JWEh_q2R)
 # Multi-Queue Round-Robin Café (Interactive CLI)
+This project simulates a café with multiple order queues served fairly using a Round-Robin scheduler. Each queue represents a customer type (e.g., Mobile, Walk-Ins, Faculty) with a maximum capacity. Orders have preparation times based on the menu item.
+The scheduler supports:
+Round-Robin order serving
+Quantum-based time slices
+Queue skipping
+Weighted fairness
+Menu specials
 
 ## How to run
 
-(Insert directions to run your program here.)
+Make sure you are in the project root directory.
+Run the interactive CLI: python -m src.cli
+Enter commands line by line,commands like:
+
+CREATE Mobile 2
+CREATE WalkIns 2
+ENQ Mobile latte
+ENQ WalkIns tea
+SPECIAL latte 1 2 5
+SETWEIGHT Mobile 2
+SKIP WalkIns
+RUN 1 2
+
+A blank line ends the session and prints: Break time!
 
 
 ## How to run tests locally
-(Insert directions to run your tests here.)
-
+python -m pytest -q
+Expected output: All tests pass (e.g: 8 passed).
 
 ## Complexity Notes
-Briefly justify:
+Queue design: Circular buffer (QueueRR) for O(1) enqueue/dequeue.
+Time complexity: Enqueue/dequeue: O(1) amortized
+Run: O(#turns + total_minutes_worked)
+Space complexity: O(N) tasks + metadata.
 
-- Your queue design (e.g., circular buffer).
-
-- Time complexity: enqueue, dequeue amortized O(1); run is O(#turns + total_minutes_worked).
-
-- Space complexity: O(N) tasks + metadata.
-
-
-## **Delete this section before submission.**
-### Common pitfalls
-- Display should print after each RUN turn only.
-
-- Don’t advance time on empty or skipped queues.
-
-- Enforce 1 ≤ steps ≤ #queues for RUN.
-
-- Auto task IDs per queue: <queue_id>-NNN (zero-padded).
-
-- Use exact messages:
-
-    - Sorry, we're at capacity.
-
-    - Sorry, we don't serve that.
-
-
-### Grading rubric (I will be using this to grade your submission)
-
-**__Correctness (50):__** RR behavior, logs, display-per-turn, auto task ids, menu handling, rejects.
-
-**__Complexity notes (15):__** correct, concise, justified.
-
-**__Student tests (15):__** ≥4 targeted, deterministic tests incl. steps validation.
-
-**__Code quality (10):__** structure, type hints on public surfaces, docstrings, PEP 8.
-
-**__Docs & UX (10):__** README completeness; exact messages; clear CLI.
+Edge Cases:
+1. Tasks rejected if queue is full or item is unknown.
+2. RUN validates 1 ≤ steps ≤ #queues.
+3. Task IDs auto-increment and are zero-padded: <queue_id>-001, <queue_id>-002, …
+4. Skipped queues are recorded but time does not advance if empty.
+5. Display is printed after each RUN turn only.
+6. Messages for errors:
+Sorry, we're at capacity.
+Sorry, we don't serve that.

@@ -1,4 +1,4 @@
-from scheduler import Scheduler
+from src.scheduler import Scheduler
 
 def test_skip_consumed_once_no_time_advance():
     s = Scheduler()

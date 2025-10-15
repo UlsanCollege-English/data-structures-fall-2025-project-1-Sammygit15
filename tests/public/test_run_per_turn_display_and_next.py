@@ -1,4 +1,4 @@
-from scheduler import Scheduler
+from src.scheduler import Scheduler
 
 def _has_run_on_queue(logs, qid):
     return any(f"event=run queue={qid}" in l for l in logs)

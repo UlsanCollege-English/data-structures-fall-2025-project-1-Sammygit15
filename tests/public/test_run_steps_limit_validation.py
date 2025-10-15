@@ -1,4 +1,4 @@
-from scheduler import Scheduler
+from src.scheduler import Scheduler
 
 def test_steps_cannot_exceed_number_of_queues():
     s = Scheduler()

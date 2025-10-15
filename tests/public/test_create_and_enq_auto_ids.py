@@ -1,4 +1,4 @@
-from scheduler import Scheduler
+from src.scheduler import Scheduler
 
 def test_auto_task_ids_increment_per_queue():
     s = Scheduler()

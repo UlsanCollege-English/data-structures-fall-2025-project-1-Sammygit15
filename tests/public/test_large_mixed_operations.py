@@ -1,4 +1,4 @@
-from scheduler import Scheduler
+from src.scheduler import Scheduler
 
 def test_large_mixed_sequence_deterministic():
     s = Scheduler()
