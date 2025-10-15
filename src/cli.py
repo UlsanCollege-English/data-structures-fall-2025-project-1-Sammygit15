@@ -1,20 +1,33 @@
+"""
+Interactive CLI with Extra Credit Support:
+- Reads lines from stdin.
+- A blank line ends the session and prints "Break time!".
+- Commands handled: CREATE, ENQ, SKIP, RUN, SPECIAL, SETWEIGHT.
+- RUN prints logs and, after each turn, the café display including skips and weights.
+"""
+
 import sys
-from typing import List, Optional, Tuple
+from typing import List
 from src.parser import parse_command
 from src.scheduler import Scheduler
+
 
 def main() -> None:
     sched = Scheduler()
 
     for raw in sys.stdin:
-        line = raw.strip()
+        line = raw.rstrip("\n")
+
+        # Blank line ends session
         if line == "":
             print("Break time!")
             return
+
+        # Ignore comment lines
         if line.startswith("#"):
             continue
 
-        parsed: Optional[Tuple[str, List[str]]] = parse_command(line)
+        parsed = parse_command(line)
         logs: List[str] = []
 
         if parsed is None:
@@ -52,7 +65,7 @@ def main() -> None:
                     steps = int(args[1]) if len(args) == 2 else None
                     run_logs = sched.run(quantum, steps)
                     logs.extend(run_logs)
-
+                    
             elif cmd == "SPECIAL":
                 if len(args) != 4:
                     logs.append("time=? event=error reason=bad_args")
@@ -80,7 +93,6 @@ def main() -> None:
         if logs:
             print("\n".join(logs))
 
-    print("Break time!")
 
 if __name__ == "__main__":
     main()

@@ -45,3 +45,21 @@ Edge Cases:
 6. Messages for errors:
 Sorry, we're at capacity.
 Sorry, we don't serve that.
+
+## Project Structure 
+
+src/
+├── cli.py               # CLI interface (user input)
+├── parser.py            # Command parser
+├── scheduler.py         # Scheduler + queue logic
+tests/
+├── public               # Provided test cases
+README.md                # This file
+
+
+##  Author
+
+Created by: Sammygit15,
+Assigned By: Prof. Benjamin William Slater, 
+Course: Data Structures – Fall 2025,
+Ulsan College, South Korea
